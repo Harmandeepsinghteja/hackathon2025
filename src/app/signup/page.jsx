@@ -25,7 +25,11 @@ export default function SignupPage() {
   return (
     <>
     <Header />
-   <div className="flex items-center justify-center min-h-screen bg-gray-100">
+   {/* <div className="flex items-center justify-center min-h-screen bg-gray-100"> */}
+   <div
+        className="flex flex-col bg-cover bg-center bg-no-repeat items-center justify-center min-h-screen bg-gray-100"
+        style={{ backgroundImage: "url('/home_tree.jpg')" }}
+      >
       <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
         <h1 className="text-4xl font-bold text-center mb-8 text-indigo-600">
           Sign Up

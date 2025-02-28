@@ -44,11 +44,13 @@ export default function AdminPage() {
   return (
     <>
      <header className="bg-white text-gray-800 py-2 shadow-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4">
+      
+      <div className="max-w-7xl mx-auto flex items-center justify-between  px-4">
+     
 
 
         {/* Left: Logo or Brand */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 ">
         
         <img src="/tree.jpg" className="" style={{ width: '50px' }} />
             {/* <a href="http://www.freepik.com">Designed by Freepik</a> */}
@@ -72,7 +74,11 @@ export default function AdminPage() {
       </div>
     </header>
      
-    <div className="min-h-screen bg-gray-100 flex">
+    {/* <div className="min-h-screen bg-gray-100 flex "> */}
+    <div
+        className="flex flex-col bg-cover bg-center bg-no-repeat items-center justify-center min-h-screen bg-gray-100"
+        style={{ backgroundImage: "url('/home_tree.jpg')" }}
+      >
     <div className="bg-white shadow-md rounded-lg p-6 m-auto">
       <h1 className="text-3xl font-bold text-center mb-6 text-indigo-600">
         Homepage
