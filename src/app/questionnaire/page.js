@@ -4,6 +4,7 @@ import { db } from "../../firebase/config";
 import { collection, addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { useAuthContext } from "@/context/AuthContext"; // ✅ Import AuthContext
 
 const questions = [
   "What are the most important moments that shaped your life?",
@@ -14,43 +15,52 @@ const questions = [
 ];
 
 export default function Questionnaire() {
+  const { user, loading } = useAuthContext(); // ✅ Get user & loading state
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const router = useRouter();
 
+  if (loading) return <div>Loading...</div>; // Prevent rendering if auth state is not loaded
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg font-semibold text-red-500">
+          You must be logged in to answer the questionnaire.
+        </p>
+      </div>
+    );
+  }
+
   const handleNext = () => {
     if (!inputValue.trim()) return; // Prevent empty answers
 
-    // Save the current answer in the array
-
     setAnswers((prevAnswers) => [...prevAnswers, inputValue]);
 
-    // Clear the input field
     setInputValue("");
 
-    // If it's the last question, submit answers
     if (currentQuestion === questions.length - 1) {
-      submitAnswers([...answers, inputValue]); // Pass the updated answers including the last one
+      submitAnswers([...answers, inputValue]); // Pass updated answers including last one
     } else {
-      // Otherwise, move to the next question
       setCurrentQuestion(currentQuestion + 1);
     }
   };
 
   const submitAnswers = async (finalAnswers) => {
     try {
-      // Mapping answers to question numbers and storing them
       const responseObj = {};
       questions.forEach((q, index) => {
         responseObj[index] = finalAnswers[index];
       });
-      console.log(responseObj);
 
       await addDoc(collection(db, "questionnaires"), {
+        userId: user.uid, // ✅ Save user UID
+        userEmail: user.email, // ✅ Optionally save email
         responses: responseObj,
         timestamp: new Date(),
       });
+
       alert("Answers submitted successfully!");
       router.push("/thank-you");
     } catch (error) {
