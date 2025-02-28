@@ -53,7 +53,7 @@ export default function Questionnaire() {
         timestamp: new Date(),
       });
       alert("Answers submitted successfully!");
-      router.push("/thank-you");
+      router.push("/thank-you")
     } catch (error) {
       console.error("Error submitting answers: ", error);
       alert("An error occurred. Please try again.");

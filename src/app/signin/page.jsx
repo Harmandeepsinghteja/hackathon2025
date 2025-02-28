@@ -17,7 +17,7 @@ export default function SigninPage() {
     if (error) {
       console.log(error);
     } else {
-      router.push("/about");
+      router.push("/admin");
     }
   };
 
