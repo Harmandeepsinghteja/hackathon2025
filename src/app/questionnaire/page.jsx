@@ -5,6 +5,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuthContext } from "@/context/AuthContext"; // ✅ Import AuthContext
+import Header from "../../components/Header"
 
 const questions = [
   "What are the most important moments that shaped your life?",
@@ -62,7 +63,7 @@ export default function Questionnaire() {
       });
 
       alert("Answers submitted successfully!");
-      router.push("/thank-you");
+      router.push("/thank-you")
     } catch (error) {
       console.error("Error submitting answers: ", error);
       alert("An error occurred. Please try again.");
@@ -70,7 +71,9 @@ export default function Questionnaire() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-600 p-4">
+   <>
+   <Header />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-300 to-green-200 p-4">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -108,6 +111,6 @@ export default function Questionnaire() {
           )}
         </div>
       </motion.div>
-    </div>
+    </div></>
   );
 }
