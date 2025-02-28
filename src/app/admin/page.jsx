@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { notFound, redirect } from "next/navigation";
 import { getAuth, signOut } from "firebase/auth";
-import Header from '../../components/Header'
+import Link from 'next/link'
 
 export default function AdminPage() {
   const { user, loading } = useAuth();
@@ -40,7 +40,34 @@ export default function AdminPage() {
 
   return (
     <>
-    <Header />
+     <header className="bg-white text-gray-800 py-2 shadow-md">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4">
+
+
+        {/* Left: Logo or Brand */}
+        <div className="flex items-center space-x-2">
+        
+        <img src="/tree.jpg" className="" style={{ width: '50px' }} />
+            {/* <a href="http://www.freepik.com">Designed by Freepik</a> */}
+          <Link href="/" className="text-lg font-bold">
+            Life Review
+          </Link>
+        </div>
+
+        {/* Right: Navigation Links */}
+        <nav className="ml-auto">
+          <ul className="flex space-x-4">
+            <li>
+              <Link href="/"  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">Logout</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <div>
+
+        </div>
+      </div>
+    </header>
      
     <div className="min-h-screen bg-gray-100 flex">
     <div className="bg-white shadow-md rounded-lg p-6 m-auto">
