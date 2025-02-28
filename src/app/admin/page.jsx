@@ -20,7 +20,10 @@ export default function AdminPage() {
     const auth = getAuth();
     try {
       await signOut(auth);
-      router.push("/"); // Redirect to home page after logout
+      // router.push("/"); // Redirect to home page after logout
+      setTimeout(() => {
+        router.push("/"); // Redirect to home page after logout
+      }, 100); // 100ms delay
     } catch (error) {
       console.error("Error signing out: ", error);
     }
@@ -58,7 +61,7 @@ export default function AdminPage() {
         <nav className="ml-auto">
           <ul className="flex space-x-4">
             <li>
-              <Link href="/"  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">Logout</Link>
+              <Link href="/" onClick={handleLogout} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md">Logout</Link>
             </li>
           </ul>
         </nav>
@@ -83,12 +86,7 @@ export default function AdminPage() {
           <button onClick={handleClick} className="mt-4 w-full bg-red-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
             Start Your Life Review
           </button>
-          <button
-            onClick={handleLogout}
-            className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
-          >
-            Logout
-          </button>
+         
         </div>
       )}
     </div>
