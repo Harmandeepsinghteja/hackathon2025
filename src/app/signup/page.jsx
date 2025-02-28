@@ -1,4 +1,6 @@
 "use client";
+
+import Header from '../../components/Header';
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import signUp from "@/firebase/auth/signup";
@@ -21,7 +23,9 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <>
+    <Header />
+   <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
         <h1 className="text-4xl font-bold text-center mb-8 text-indigo-600">
           Sign Up
@@ -74,5 +78,7 @@ export default function SignupPage() {
         </p>
       </div>
     </div>
+
+    </>
   );
 }

@@ -1,4 +1,6 @@
 'use client';
+
+import Header from '../../components/Header';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import signIn from '@/firebase/auth/signin';
@@ -20,6 +22,8 @@ export default function SigninPage() {
     };
 
     return (
+        <>
+        <Header />
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
                 <h1 className="text-4xl font-bold text-center mb-8 text-indigo-600">Sign In</h1>
@@ -65,5 +69,6 @@ export default function SigninPage() {
                 </p>
             </div>
         </div>
+        </>
     );
 }
