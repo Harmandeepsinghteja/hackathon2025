@@ -8,13 +8,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBTSx7IMETPOEedL0iudnItdXlXLZECxeg",
-  authDomain: "hackathon2025-ea6a2.firebaseapp.com",
-  projectId: "hackathon2025-ea6a2",
-  storageBucket: "hackathon2025-ea6a2.firebasestorage.app",
-  messagingSenderId: "374671026372",
-  appId: "1:374671026372:web:85523a9995363313458191",
-  measurementId: "G-4Z8ZPDHRS7",
+  apiKey: "AIzaSyBrf6oOYd61TxNEUGNOhS-fy5T_1Yicn3E",
+  authDomain: "hackathon-b0456.firebaseapp.com",
+  projectId: "hackathon-b0456",
+  storageBucket: "hackathon-b0456.firebasestorage.app",
+  messagingSenderId: "908266648875",
+  appId: "1:908266648875:web:194ea511892b0980df016e",
 };
 
 // Initialize Firebase
