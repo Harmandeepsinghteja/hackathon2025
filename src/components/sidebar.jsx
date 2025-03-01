@@ -19,7 +19,7 @@ export default function Sidebar(){
                          </button>
                     </li>
                     <li>
-                        <button onClick={() => router.push("/")}
+                        <button onClick={() => router.push("/upload-image")}
                              className="text-green-500 bg-transparent border-2 border-green-500 rounded-md px-4 py-2 hover:bg-green-500 hover:text-white transition-colors">
                                 Upload Images
                          </button>
