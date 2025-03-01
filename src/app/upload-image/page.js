@@ -1,134 +1,146 @@
 "use client";
-import { useState, useEffect } from "react";
-import { db, storage } from "../../firebase/config";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import { useAuthContext } from "@/context/AuthContext";
 import Header from "../../components/Header";
+import { useState, useEffect, useRef } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  getStorage,
+  ref,
+  listAll,
+  getDownloadURL,
+  uploadBytes,
+} from "firebase/storage";
 
-export default function ImageUpload() {
-  const { user, loading } = useAuthContext();
-  const [file, setFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
-  const [uploading, setUploading] = useState(false);
-  const router = useRouter();
+export default function Memories() {
+  const [images, setImages] = useState([]);
+  const [user, setUser] = useState(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
-    const fetchExistingImage = async () => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const q = query(
-          collection(db, "userImages"),
-          where("userId", "==", user.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-          const userData = querySnapshot.docs[0].data();
-          setImageUrl(userData.imageUrl || "");
-        }
+        setUser(user);
+        fetchImages(user.uid);
+      } else {
+        setUser(null);
+        setImages([]);
       }
-    };
-    fetchExistingImage();
-  }, [user]);
+    });
 
-  if (loading) return <div>Loading...</div>;
+    return () => unsubscribe();
+  }, []);
 
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-lg font-semibold text-red-500">
-          You must be logged in to upload images.
-        </p>
-      </div>
-    );
-  }
-
-  const handleFileChange = (e) => {
-    if (e.target.files[0]) {
-      setFile(e.target.files[0]);
-    }
+  const fetchImages = (uid) => {
+    console.log("fetching images");
+    const storage = getStorage();
+    const storageRef = ref(storage, `images/${uid}`);
+    listAll(storageRef).then((res) => {
+      const promises = res.items.map((itemRef) => getDownloadURL(itemRef));
+      Promise.all(promises).then((urls) => {
+        setImages(urls);
+        console.log("images fetched");
+        console.log(urls);
+      });
+    });
   };
 
-  const handleUpload = async () => {
-    if (!file) return;
+  const handleAddImage = () => {
+    fileInputRef.current.click();
+  };
 
-    setUploading(true);
-    try {
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    const storage = getStorage();
+    const uploadPromises = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
       const storageRef = ref(storage, `images/${user.uid}/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(storageRef);
-
-      const userImageRef = doc(db, "userImages", user.uid);
-      await setDoc(
-        userImageRef,
-        {
-          userId: user.uid,
-          imageUrl: downloadURL,
-          timestamp: new Date(),
-        },
-        { merge: true }
-      );
-
-      setImageUrl(downloadURL);
-      alert("Image uploaded successfully!");
-    } catch (error) {
-      console.error("Error uploading image: ", error);
-      alert("An error occurred. Please try again.");
+      const uploadTask = uploadBytes(storageRef, file).then((snapshot) => {
+        return getDownloadURL(snapshot.ref);
+      });
+      uploadPromises.push(uploadTask);
     }
-    setUploading(false);
+
+    Promise.all(uploadPromises)
+      .then((urls) => {
+        setImages((prevImages) => [...prevImages, ...urls]);
+        console.log("Uploaded files:", urls);
+      })
+      .catch((error) => {
+        console.error("Error uploading files:", error);
+      });
   };
 
   return (
     <>
       <Header />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-300 to-blue-200 p-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white p-6 md:p-8 rounded-2xl shadow-xl max-w-lg w-full text-center"
-        >
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            Upload Your Image
-          </h1>
-          <input
-            type="file"
-            onChange={handleFileChange}
-            accept="image/*"
-            className="w-full mb-4"
-          />
-          <button
-            onClick={handleUpload}
-            disabled={!file || uploading}
-            className={`w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg transition-all ${
-              (!file || uploading) && "opacity-50 cursor-not-allowed"
-            }`}
-          >
-            {uploading ? "Uploading..." : "Upload Image"}
-          </button>
-          {imageUrl && (
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-2">
-                Your Uploaded Image:
-              </h2>
-              <img
-                src={imageUrl}
-                alt="Uploaded"
-                className="w-full rounded-lg"
-              />
-            </div>
-          )}
-        </motion.div>
-      </div>
+      <h1 className="text-2xl font-semibold text-gray-800 my-4 text-center">
+        Memories
+      </h1>
+      {images.length === 0 ? (
+        <p className="text-center">No images</p>
+      ) : (
+        <div className="grid-container">
+          {images.map((src, index) => (
+            <img
+              key={index}
+              src={src}
+              alt={`Memory ${index + 1}`}
+              className="grid-item"
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Add image button */}
+      <button className="floating-button" onClick={handleAddImage}>
+        +
+      </button>
+
+      {/* Hidden file input */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+        multiple
+        accept="image/*"
+      />
+
+      <style jsx>{`
+        .grid-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 16px;
+          padding: 16px;
+        }
+        .grid-item {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+        }
+        .floating-button {
+          position: fixed;
+          bottom: 16px;
+          right: 16px;
+          width: 56px;
+          height: 56px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          font-size: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+          cursor: pointer;
+        }
+        .floating-button:hover {
+          background-color: #0056b3;
+        }
+      `}</style>
     </>
   );
 }
