@@ -9,7 +9,7 @@ export default function About() {
           <div className="flex items-center space-x-2">
             <img src="/tree.jpg" alt="Life Review Logo" className="w-12 h-12" />
             <Link href="/" className="text-lg font-bold">
-              Life Review
+              Legacy
             </Link>
           </div>
 
