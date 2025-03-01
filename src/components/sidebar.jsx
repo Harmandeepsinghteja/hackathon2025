@@ -11,11 +11,17 @@ export default function Sidebar(){
             <div className="items-center justify-start max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
                 <h1 className="text-gray-900 text-3xl  font-bold text-center mb-6">What would you like to do?</h1>
                 
-                <ul className='flex space-x-4'>
+                <ul className='flex justify-center space-x-2'>
+                <li>
+                        <button onClick={() => router.push("/questionnaire")}
+                             className="text-green-500 bg-transparent border-2 border-green-500 rounded-md px-4 py-2 hover:bg-green-500 hover:text-white transition-colors">
+                             Review Answers
+                        </button>
+                    </li>
                      <li>
                         <button onClick={()=> router.push("/ai-questionnaire")}
                              className="text-green-500 bg-transparent border-2 border-green-500 rounded-md px-4 py-2 hover:bg-green-500 hover:text-white transition-colors">
-                                Talk With A Friend (AI)
+                                Let's Chat(AI)
                          </button>
                     </li>
                     <li>
