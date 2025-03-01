@@ -16,7 +16,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import Header from "../../components/Header2";
 
 const questions = [
-  "What is your name",
+  "What is your name ?",
   "What are the most important moments that shaped your life?",
   "What are some of your favorite memories that make you smile?",
   "Who are the people that meant the most to you, and why?",
