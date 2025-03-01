@@ -157,9 +157,8 @@ export default function AiQuestionnaire() {
           <p className="text-lg text-gray-600 mb-6">
             {questions[currentQuestion]}
           </p>
-          <input
-            type="text"
-            className="w-full px-4 py-3 border rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+          <textarea
+            className="w-full px-4 py-3 border rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-vertical min-h-[300px]"
             value={inputValue || ""}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Type your answer here..."
