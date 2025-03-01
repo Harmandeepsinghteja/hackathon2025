@@ -15,13 +15,13 @@ export default function Sidebar(){
                 <li>
                         <button onClick={() => router.push("/questionnaire")}
                              className="text-green-500 bg-transparent border-2 border-green-500 rounded-md px-4 py-2 hover:bg-green-500 hover:text-white transition-colors">
-                             Review Responses
+                             Review Answers
                         </button>
                     </li>
                      <li>
                         <button onClick={()=> router.push("/ai-questionnaire")}
                              className="text-green-500 bg-transparent border-2 border-green-500 rounded-md px-4 py-2 hover:bg-green-500 hover:text-white transition-colors">
-                                Let's Chat
+                                Let's Chat(AI)
                          </button>
                     </li>
                     <li>
