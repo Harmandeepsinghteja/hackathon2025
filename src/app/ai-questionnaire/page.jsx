@@ -18,6 +18,7 @@ import Header from "../../components/Header2";
 import { generateQuestions } from "../../utils/gemini";
 
 const baseQuestions = [
+  "What is your name ?",
   "What are the most important moments that shaped your life?",
   "What are some of your favorite memories that make you smile?",
   "Who are the people that meant the most to you, and why?",
@@ -157,9 +158,8 @@ export default function AiQuestionnaire() {
           <p className="text-lg text-gray-600 mb-6">
             {questions[currentQuestion]}
           </p>
-          <input
-            type="text"
-            className="w-full px-4 py-3 border rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+          <textarea
+            className="w-full px-4 py-3 border rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-vertical min-h-[300px]"
             value={inputValue || ""}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Type your answer here..."
