@@ -11,12 +11,27 @@ export async function generateQuestions(
 ) {
   try {
     // Create the prompt using the base questions and existing answers
-    const prompt = `Given these base questions and their answers:
+    const prompt = `
+    Context:
+You are an AI assistant helping a palliative care patient create a legacy text summary. Based on their answers to initial questions, you need to generate new, insightful questions to further explore their life experiences and values.
+
+Task:
+Given the following base questions and their answers:
+
 ${baseQuestions
   .map((q, i) => `Q: ${q}\nA: ${existingAnswers[i] || "No answer provided"}`)
   .join("\n\n")}
 
-Generate ${numNewQuestions} new, unique questions that build upon or explore related topics to the existing questions and answers. Ensure the new questions are relevant and provide deeper insights into the subject matter. Please return the question in json format`;
+Generate ${numNewQuestions} new, unique questions that:
+
+1.  Build upon or explore related topics to the existing questions and answers.
+2.  Provide deeper insights into the user's life, values, and experiences.
+3.  Are relevant and directly related to the user's provided answers.
+4.  Maintain a thoughtful, reflective, and empathetic tone.
+5.  Avoid being redundant or too similar to the base questions.
+
+Output Format:
+Return the new questions in JSON format`;
 
     // Initialize the Google Generative AI instance with the API key
     const genAI = new GoogleGenerativeAI(API_KEY);
