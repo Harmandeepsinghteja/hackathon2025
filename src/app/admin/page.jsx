@@ -55,7 +55,7 @@ export default function AdminPage() {
         <img src="/tree.jpg" className="" style={{ width: '50px' }} />
             {/* <a href="http://www.freepik.com">Designed by Freepik</a> */}
           <Link href="/" className="text-lg font-bold">
-            Life Review
+            Legacy
           </Link>
         </div>
 
