@@ -55,6 +55,7 @@ Before you begin, make sure you have the following installed on your machine:
 - `src/context/`: Includes the AuthContext for managing user authentication state.
 - `src/firebase/`: Contains Firebase configuration and utility functions for authentication and data operations.
 
+
 ## Deployment
 
 To deploy the application, you can follow the official Next.js deployment guides for your preferred hosting platform, such as Vercel, Netlify, or Firebase Hosting.
