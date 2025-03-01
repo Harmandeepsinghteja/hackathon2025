@@ -34,7 +34,7 @@ export default function Home() {
       >
             
             <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
-                <h1 className="text-black text-3xl  font-bold text-center mb-6">Welcome to the Begining of the End</h1>
+                <h1 className="text-black text-3xl  font-bold text-center mb-6">Welcome to Life Review</h1>
                 <p className="text-gray-600 text-center mb-8">
                     Sign Up or Sign In To Get Started!
                 </p>
