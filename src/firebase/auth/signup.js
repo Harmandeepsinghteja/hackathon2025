@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import firebase_app from "../config"; // Firebase app initialization
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
@@ -5,17 +6,16 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 const auth = getAuth(firebase_app);
 
 // Sign up function
-export default async function signUp(email, password) {
-  let result = null;
-  let error = null;
-  console.log(email);
+export default async function signUp(_, formData) {
   try {
-    // Attempt to create user with email and password
-    result = await createUserWithEmailAndPassword(auth, email, password);
-  } catch (e) {
-    error = e; // Capture any errors
-  }
+    const email = formData.get("email")
+    const password = formData.get("password")
 
-  // Return the result and error
-  return { result, error };
+    await createUserWithEmailAndPassword(auth, email, password);
+  }
+  catch(error){
+    return {message: error.message}
+  }
+  
+  redirect('/admin')
 }
