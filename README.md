@@ -55,37 +55,6 @@ Before you begin, make sure you have the following installed on your machine:
 - `src/context/`: Includes the AuthContext for managing user authentication state.
 - `src/firebase/`: Contains Firebase configuration and utility functions for authentication and data operations.
 
-## Main Branch Rules
-
-1. **Direct Push to Main**:
-
-   - **Do not push directly to the `main` branch**. All changes must go through a pull request (PR) process.
-
-2. **Creating a Feature Branch**:
-
-   - When working on a new feature, bug fix, or improvement, **create a separate branch** off the `main` branch.
-   - Name your branch based on the feature or task you are working on (e.g., `feature/login-page`, `bugfix/missing-logo`, etc.).
-
-3. **Creating a Pull Request**:
-
-   - Once you've completed the changes in your feature branch, create a pull request (PR) targeting the `main` branch.
-   - Ensure that your PR has a clear title and description explaining what the changes are.
-   - Include relevant details about the feature or bug fix, as well as any related issue numbers.
-
-4. **Code Review**:
-
-   - All pull requests should be **reviewed by at least one other team member** before merging.
-   - Make sure the code follows the project’s coding standards, and runs correctly after testing.
-   - Any issues or suggestions identified during the review process should be addressed before merging.
-
-5. **Merging**:
-
-   - Once the pull request is approved, you can **merge it into the `main` branch**.
-   - Ensure that the merge doesn’t introduce any conflicts. If conflicts arise, resolve them before merging.
-   - After merging, **delete the feature branch** to keep the repository clean.
-
-6. **Continuous Integration (CI)**:
-   - Ensure that all tests pass and the application works as expected on the `main` branch before merging any pull request.
 
 ## Deployment
 
