@@ -14,7 +14,7 @@ import {
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuthContext } from "@/context/AuthContext";
-import Header from "../../components/Header";
+import Header from "../../components/Header2";
 import { generateQuestions } from "../../utils/gemini";
 
 const baseQuestions = [

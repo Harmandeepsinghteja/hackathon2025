@@ -14,7 +14,7 @@ import {
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuthContext } from "@/context/AuthContext"; // ✅ Import AuthContext
-import Header from "../../components/Header";
+import Header from "../../components/Header2";
 
 const questions = [
   "What are the most important moments that shaped your life?",
@@ -149,24 +149,23 @@ export default function Questionnaire() {
             onChange={(e) => setInputValue(e.target.value)} // Update onChange
             placeholder="Type your answer here..."
           />
-          <div className="flex justify-center mt-6">
-  {currentQuestion < questions.length - 1 ? (
-    <button
-      className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg transition-all"
-      onClick={handleNext}
-    >
-      Next
-    </button>
-  ) : (
-    <button
-      className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition-all"
-      onClick={handleNext}
-    >
-      Submit
-    </button>
-  )}
-</div>
-
+          <div className="flex justify-end mt-6">
+            {currentQuestion < questions.length - 1 ? (
+              <button
+                className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg transition-all"
+                onClick={handleNext}
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition-all"
+                onClick={handleNext}
+              >
+                Submit
+              </button>
+            )}
+          </div>
         </motion.div>
       </div>
     </>
