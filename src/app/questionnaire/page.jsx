@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { db } from "../../firebase/config";
 import {
   collection,
-  addDoc,
   query,
   where,
   getDocs,
@@ -13,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { useAuthContext } from "@/context/AuthContext"; // ✅ Import AuthContext
+import { useAuthContext } from "@/context/AuthContext";
 import Header from "../../components/Header2";
 
 const questions = [
@@ -25,10 +24,10 @@ const questions = [
 ];
 
 export default function Questionnaire() {
-  const { user, loading } = useAuthContext(); // ✅ Get user & loading state
+  const { user, loading } = useAuthContext();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const [inputValue, setInputValue] = useState(""); // Store the input value for each question
+  const [inputValue, setInputValue] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const router = useRouter();
 
@@ -52,12 +51,11 @@ export default function Questionnaire() {
 
   useEffect(() => {
     if (answers.length > 0) {
-      // Set the current input value to the predefined answer when the current question changes
       setInputValue(answers[currentQuestion] || "");
     }
   }, [currentQuestion, answers]);
 
-  if (loading) return <div>Loading...</div>; // Prevent rendering if auth state is not loaded
+  if (loading) return <div>Loading...</div>;
 
   if (!user) {
     return (
@@ -70,19 +68,18 @@ export default function Questionnaire() {
   }
 
   const handleNext = () => {
-    if (!inputValue.trim()) return; // Prevent empty answers
+    if (!inputValue.trim()) return;
 
-    // Update the answers only if the inputValue is different
     setAnswers((prevAnswers) => {
       const updatedAnswers = [...prevAnswers];
-      updatedAnswers[currentQuestion] = inputValue; // Update the current answer
+      updatedAnswers[currentQuestion] = inputValue;
       return updatedAnswers;
     });
 
-    setInputValue(""); // Clear input after saving
+    setInputValue("");
 
     if (currentQuestion === questions.length - 1) {
-      submitAnswers([...answers, inputValue]); // Pass updated answers including last one
+      submitAnswers([...answers, inputValue]);
     } else {
       setCurrentQuestion(currentQuestion + 1);
     }
@@ -102,7 +99,6 @@ export default function Questionnaire() {
       });
 
       if (querySnapshot.empty) {
-        // No existing entry, create a new one
         await setDoc(doc(db, "questionnaires", user.uid), {
           userId: user.uid,
           userEmail: user.email,
@@ -111,7 +107,6 @@ export default function Questionnaire() {
         });
         alert("Answers submitted successfully!");
       } else {
-        // Entry exists, update it
         await updateDoc(doc(db, "questionnaires", user.uid), {
           responses: responseObj,
           timestamp: new Date(),
@@ -142,11 +137,10 @@ export default function Questionnaire() {
           <p className="text-lg text-gray-600 mb-6">
             {questions[currentQuestion]}
           </p>
-          <input
-            type="text"
-            className="w-full px-4 py-3 border rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
-            value={inputValue || ""} // Ensure it's properly bound to the state
-            onChange={(e) => setInputValue(e.target.value)} // Update onChange
+          <textarea
+            className="w-full px-4 py-3 border rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-vertical min-h-[300px]"
+            value={inputValue || ""}
+            onChange={(e) => setInputValue(e.target.value)}
             placeholder="Type your answer here..."
           />
           <div className="flex justify-end mt-6">
