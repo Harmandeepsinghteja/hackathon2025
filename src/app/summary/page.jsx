@@ -152,7 +152,7 @@ export default function AiQuestionnaireSummary() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-700 to-white p-4">
         <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl max-w-2xl w-full">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            Your AI Questionnaire Summary
+            My Life Review
           </h1>
           <div className="text-lg text-gray-600 mb-6 whitespace-pre-wrap">
             {summary}
