@@ -74,39 +74,41 @@ export default function Memories() {
 
   return (
     <>
-      <Header />
-      <h1 className="text-2xl font-semibold text-gray-800 my-4 text-center">
-        Memories
-      </h1>
-      {images.length === 0 ? (
-        <p className="text-center">No images</p>
-      ) : (
-        <div className="grid-container">
-          {images.map((src, index) => (
-            <img
-              key={index}
-              src={src}
-              alt={`Memory ${index + 1}`}
-              className="grid-item"
-            />
-          ))}
-        </div>
-      )}
+      <Header  />
+      <div className="bg-gray-100 min-h-screen mt-0 p-0"> 
+        <h1 className="text-2xl font-semibold text-gray-800 my-4 text-center">
+          Memories
+        </h1>
+        {images.length === 0 ? (
+          <p className="text-center">No images</p>
+        ) : (
+          <div className="grid-container">
+            {images.map((src, index) => (
+              <img
+                key={index}
+                src={src}
+                alt={`Memory ${index + 1}`}
+                className="grid-item"
+              />
+            ))}
+          </div>
+        )}
 
-      {/* Add image button */}
-      <button className="floating-button" onClick={handleAddImage}>
-        +
-      </button>
+        {/* Add image button */}
+        <button className="floating-button" onClick={handleAddImage}>
+          +
+        </button>
 
-      {/* Hidden file input */}
-      <input
-        type="file"
-        ref={fileInputRef}
-        style={{ display: "none" }}
-        onChange={handleFileChange}
-        multiple
-        accept="image/*"
-      />
+        {/* Hidden file input */}
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+          multiple
+          accept="image/*"
+        />
+      </div>
 
       <style jsx>{`
         .grid-container {
