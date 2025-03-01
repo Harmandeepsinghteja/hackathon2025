@@ -129,7 +129,7 @@ export default function Questionnaire() {
   return (
     <>
       <Header />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-300 to-green-200 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-600 to-green-400 p-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,23 +149,24 @@ export default function Questionnaire() {
             onChange={(e) => setInputValue(e.target.value)} // Update onChange
             placeholder="Type your answer here..."
           />
-          <div className="flex justify-end mt-6">
-            {currentQuestion < questions.length - 1 ? (
-              <button
-                className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg transition-all"
-                onClick={handleNext}
-              >
-                Next
-              </button>
-            ) : (
-              <button
-                className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition-all"
-                onClick={handleNext}
-              >
-                Submit
-              </button>
-            )}
-          </div>
+          <div className="flex justify-center mt-6">
+  {currentQuestion < questions.length - 1 ? (
+    <button
+      className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg transition-all"
+      onClick={handleNext}
+    >
+      Next
+    </button>
+  ) : (
+    <button
+      className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition-all"
+      onClick={handleNext}
+    >
+      Submit
+    </button>
+  )}
+</div>
+
         </motion.div>
       </div>
     </>

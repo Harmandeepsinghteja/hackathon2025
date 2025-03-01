@@ -94,7 +94,7 @@ export default function AiQuestionnaireSummary() {
   return (
     <>
       <Header />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-300 to-blue-200 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-700 to-white p-4">
         <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl max-w-2xl w-full">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
             Your AI Questionnaire Summary

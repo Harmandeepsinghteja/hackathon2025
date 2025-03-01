@@ -31,7 +31,7 @@ export default function SignupPage() {
         style={{ backgroundImage: "url('/home_tree.jpg')" }}
       >
       <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
-        <h1 className="text-4xl font-bold text-center mb-8 text-indigo-600">
+        <h1 className="text-4xl font-bold text-center mb-8 text-black">
           Sign Up
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -47,7 +47,7 @@ export default function SignupPage() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-100 text-gray-700"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-100 text-gray-700"
               required
             />
           </div>
@@ -63,13 +63,13 @@ export default function SignupPage() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-100 text-gray-700"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-100 text-gray-700"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+            className="w-full bg-green-600 hover:bg-green-900 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
           >
             Sign Up
           </button>

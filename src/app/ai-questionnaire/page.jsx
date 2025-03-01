@@ -144,7 +144,7 @@ export default function AiQuestionnaire() {
   return (
     <>
       <Header />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-300 to-blue-200 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-600 to-green-400 p-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

@@ -80,13 +80,13 @@ export default function AdminPage() {
         style={{ backgroundImage: "url('/home_tree.jpg')" }}
       >
     <div className="bg-white shadow-md rounded-lg p-6 m-auto">
-      <h1 className="text-3xl font-bold text-center mb-6 text-indigo-600">
-        Homepage
+      <h1 className="text-3xl font-bold text-center mb-6 text-black">
+        Welcome!
       </h1>
       {user && (
         <div>
           <p className="text-gray-600 text-center mb-8">
-            Hello, {user.email}
+           You are logged in as {user.email}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
           <button onClick={handleClick} className="mt-4 w-full bg-red-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
