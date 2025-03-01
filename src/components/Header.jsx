@@ -23,6 +23,9 @@ const Header = () => {
               <Link href="/" className="hover:text-indigo-300 text-sm">Home</Link>
             </li>
             <li>
+              <Link href="/memories" className="hover:text-indigo-300 text-sm">Memories</Link>
+            </li>
+            <li>
               <Link href="/about" className="hover:text-indigo-300 text-sm">About</Link>
             </li>
             <li>
