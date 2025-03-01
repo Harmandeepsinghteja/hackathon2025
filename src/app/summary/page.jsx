@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import Header from "../../components/Header";
 
-const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY || "YOUR_API_KEY_HERE";
+const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY || "AIzaSyDO_11wfMuwjnXabgLprujPI7K7Sb5YDKg";
 
 async function summarizeQA(questionsAndAnswers) {
   const genAI = new GoogleGenerativeAI(API_KEY);
